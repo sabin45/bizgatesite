@@ -51,13 +51,8 @@
             <div class="about-content" data-aos="fade-left" data-aos-delay="100">
               <h2>About Us</h2>
               <h3><?php echo $data['title'];?></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               <p><?php echo $data['description']; ?></p>
-              <ul>
-                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-              </ul>
+              
             </div>
           </div>
              
@@ -79,10 +74,15 @@
       <div class="container" data-aos="fade-up">
             
         <header class="section-header">
-          <h3>Services</h3>
-          
+        <?php  
+              $select_service = "SELECT * FROM tbl_heading";
+              $result_service = mysqli_query($conn,$select_service);
+              while($data = mysqli_fetch_array($result_service)){
+            ?>  
+          <h3><?php echo $data['title']; ?></h3>
+          <h4><?php echo $data['description']; ?></h4>
         </header>
-
+<?php } ?>
       <div class="row g-5">
         <?php  
               $select_service = "SELECT * FROM tbl_services";

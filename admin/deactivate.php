@@ -6,7 +6,7 @@
 
   // Check if id is set or not, if true,
   // toggle else simply go back to the page
-  if (isset($_GET['id'])){
+  if (isset($_GET['id'])){0
 
       // Store the value from get to 
       // a local variable "course_id"

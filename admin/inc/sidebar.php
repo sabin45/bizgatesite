@@ -159,6 +159,29 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-puzzle-piece"></i>
+              <p>
+                Sections
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addsection.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Section</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="managesection.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mange Section</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-solid fa-user"></i>
               <p>
                 Users
