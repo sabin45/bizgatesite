@@ -31,14 +31,18 @@ if($email == true){
 //edit clicked
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $show_query = "SELECT * from tbl_testimonials where id = $id";
+    $show_query = "SELECT * from tbl_teams where id = $id";
     $show_result = mysqli_query($conn,$show_query);
     $row = $show_result->fetch_assoc();
 
     $name = $row['name'];
-    $occupation = $row['occupation'];
-    $description = html_entity_decode($row['description']);
+    $position = $row['position'];
     $img_link = $row['img_link'];
+    $twitter_link= $row['twitter_links'];
+    $facebook_link = $row['facebook_links'];
+    $instagram_link= $row['instagram_links'];
+    $linkedin_link = $row['linkedin_links'];
+
     
 
 }
@@ -47,26 +51,30 @@ if(isset($_GET['id'])){
 
 
 
-                    <?php
-    //saving the data of form
-if(isset($_POST['update'])){
+<?php
+
+if(isset($_POST['submit'])){
     $name = $_POST['name'];
-    $occupation = $_POST['occupation'];
-    $description = html_entity_decode($_POST['description']);
+    $position = $_POST['position'];
     $img_link = $_POST['file_link'];
+    $twitter_link= $_POST['twitter_link'];
+    $facebook_link = $_POST['facebook_link'];
+    $instagram_link= $_POST['instagram_link'];
+    $linkedin_link = $_POST['linkedin_link'];
 
 
-    if($name!== "" && $description!=="" && $img_link!=="" && $occupation!==""){
-        $update_query = "UPDATE  tbl_testimonials SET name= '$name',occupation = '$occupation',description='$description',img_link='$img_link' where id = '$id'";
+
+    if($name!== "" && $position!=="" && $img_link!==""){
+        $update_query = "UPDATE  tbl_teams SET name= '$name',position = '$position',img_link='$img_link',twitter_links='$twitter_link',facebook_links='$facebook_link' ,instagram_links='$instagram_link' ,linkedin_links='$linkedin_link' where id = '$id'";
         $update_result = mysqli_query($conn,$update_query);
 
         if($update_result){     
         ?>
         <div class="alert alert-success alert-dissmissible fade show" id="success-alert">
             <button type="button" class= "close" data-dismiss = "alert">&times;</button>
-            <strong>Testimonials Updated </strong> successfully.
+            <strong>Teams memger updated </strong> successfully.
         </div>
-        <meta http-equiv="refresh" content="0; URL=managetestimonial.php?msg=success" />
+        <meta http-equiv="refresh" content="0; URL=manageteams.php?msg=success" />
         
 
 <?php
@@ -92,8 +100,8 @@ if(isset($_POST['update'])){
 ?>
 
 
-                    <!-- form started -->
-                    <div class="container">
+                      <!-- form started -->
+                      <div class="container">
                         <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Add Why CHoose Us</h6>
                         </div>
@@ -102,18 +110,13 @@ if(isset($_POST['update'])){
                         <form action="#" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="title">Name <span style="color:red;">*</span></label>
-                                    <input type="text"class="form-control" name="name" id="" placeholder="" value ="<?php echo $name; ?>" required>          
+                                    <input type="text"class="form-control" name="name" id="" placeholder="" value ="<?php echo $name; ?>"  required>          
                                 </div>
                                 <div class="form-group mb-3">                               
-                                    <label for="">Occupation</label>
-                                    <input type="text" id ="icon" class="form-control" name="occupation" value ="<?php echo $occupation; ?>" placeholder="">
+                                    <label for="">Position</label>
+                                    <input type="text" id ="icon" class="form-control" name="position" value ="<?php echo $position; ?>"  placeholder="">
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="">Description <span style="color:red;">*</span></label>
-                                    <textarea class="form-control" id="editor" name="description"  required><?php echo $description; ?></textarea>
-                                </div>
-                                
+                               
                                 <div class="form-group mb-3">                               
                                     <label for="">Browse Image <span style="color:red;">*</span></label>
                                 </div>
@@ -161,10 +164,26 @@ if(isset($_POST['update'])){
                                         </div>
 
                                 <div class="form-group mb-3">                               
-                                    <label for="">Image Link <span style="color:red;">*</span></label>
-                                    <input type="text" id ="imagebox" class="form-control" name="file_link" value ="<?php echo $img_link; ?>" placeholder="">
+                                    <label for="">Image Link </label>
+                                    <input type="text" id ="imagebox" class="form-control" name="file_link" placeholder="" value ="<?php echo $img_link; ?>" >
                                 </div>
-                                <button type="update" id = "update" class="btn btn-primary" name="update">UPDATE</button>
+                                <div class="form-group mb-3">                               
+                                    <label for="">Twitter Link </label>
+                                    <input type="text" id ="" class="form-control" name="twitter_link" placeholder="" value ="<?php echo $twitter_link; ?>" >
+                                </div>
+                                <div class="form-group mb-3">                               
+                                    <label for="">Facebook Link </label>
+                                    <input type="text" id ="" class="form-control" name="facebook_link" placeholder="" value ="<?php echo $facebook_link; ?>" >
+                                </div>
+                                <div class="form-group mb-3">                               
+                                    <label for="">Instagram Link</label>
+                                    <input type="text" id ="" class="form-control" name="instagram_link" placeholder="" value ="<?php echo $instagram_link; ?>" >
+                                </div>
+                                <div class="form-group mb-3">                               
+                                    <label for="">Linkedin Link</label>
+                                    <input type="text" id ="" class="form-control" name="linkedin_link" placeholder="" value ="<?php echo $linkedin_link; ?>" >
+                                </div>
+                                <button type="submit" id = "submit" class="btn btn-primary" name="submit">UPDATE</button>
                 </form>
             </div>
 
@@ -183,11 +202,5 @@ if(isset($_POST['update'])){
             function firstFunction() {
                         document.getElementById('imagebox').value = document.querySelector('input[name=img]:checked').value;
                     }
-
-                CKEDITOR.replace('editor');
             </Script>
-            <style>
-            .ck-editor__editable_inline {
-                min-height: 400px;
-            }
-            </style>
+          

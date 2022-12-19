@@ -23,6 +23,19 @@ $email = $_SESSION['email'];
             <div id="content">
 
                 <?php require('inc/navbar.php'); ?>
+                <?php 
+                if (isset($_GET['id'])){
+                   $section_id =$_GET['id'];
+                    $status = $_GET['status'];
+             
+                    $sql="UPDATE tbl_testimonials SET 
+                        status= '$status' WHERE id= '$section_id'";
+
+                    mysqli_query($conn,$sql);
+                }
+                
+                
+              ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -75,7 +88,17 @@ $email = $_SESSION['email'];
                                             <td><?php echo $data['occupation']?></td>
                                             <td><?php echo $data['description']; ?></td>
                                             <td><?php echo $data['img_link']; ?></td>
-                                            <td><button type="button" name="" id="" class="btn btn-primary btn-sm btn-lg btn-block"><?php echo $data['status']; ?></button></td>
+                                            <td><button type="button" name="" id="" class="btn btn-sm btn-lg btn-block">
+                                                <?php if($data['status']=="1") {
+                                                    echo "<a href=managetestimonial.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
+                                                }
+                                                    elseif($data['status']=="0"){
+
+                                                        echo "<a href=managetestimonial.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
+                                                        
+                                                    }
+                                                     ?></button>
+                                                     </td>
                                         </tr>
                                         <?php      
                                     }

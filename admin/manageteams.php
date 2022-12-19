@@ -24,13 +24,12 @@ $email = $_SESSION['email'];
 
                 <?php require('inc/navbar.php'); ?>
 
-
                 <?php 
                 if (isset($_GET['id'])){
                    $section_id =$_GET['id'];
                     $status = $_GET['status'];
              
-                    $sql="UPDATE tbl_heading SET 
+                    $sql="UPDATE tbl_teams SET 
                         status= '$status' WHERE id= '$section_id'";
 
                     mysqli_query($conn,$sql);
@@ -39,9 +38,8 @@ $email = $_SESSION['email'];
                 // Go back to course-page.php
                 }
                 
-              ?>
                 
-           
+              ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -57,59 +55,66 @@ $email = $_SESSION['email'];
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>FIle</th>
+                                            <th>Twitter Link</th>
+                                            <th>Facebook Link</th>
+                                            <th>Instagram Link</th>
+                                            <th>LinkedIn Link</th>
                                             <th>Status</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>FIle</th>
+                                            <th>Twitter Link</th>
+                                            <th>Facebook Link</th>
+                                            <th>Instagram Link</th>
+                                            <th>LinkedIn Link</th>
                                             <th>Status</th>
-                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                    $select_query = "SELECT * FROM tbl_heading ORDER BY created_at DESC";
+                                    $select_query = "SELECT * FROM tbl_teams ORDER BY created_at DESC";
                                     $select_result = mysqli_query($conn,$select_query);
                                     $count = 0;
                                     while($data = mysqli_fetch_array($select_result))
                                     {
                                         $count += 1; //$count = $count + 1;
                                         ?>
-
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>
-                                                <a name="" id="" class="btn btn-primary btn-sm" href="editsection.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
-                                                <a name="" id="" class="btn btn-danger btn-sm" href="process/deletesection.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
+                                                <a name="" id="" class="btn btn-primary btn-sm" href="editteams.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
+                                                <a name="" id="" class="btn btn-danger btn-sm" href="process/deleteteams.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
                                             </td>
-                                            <td><?php echo $data['title']; ?></td>
-                                            <td><?php echo $data['description']; ?></td>
-                                            
+                                            <td><?php echo $data['name']?></td>
+                                            <td><?php echo $data['position']?></td>
+                                            <td><?php echo $data['img_link']; ?></td>
+                                            <td><?php echo $data['twitter_links']; ?></td>
+                                            <td><?php echo $data['facebook_links']; ?></td>
+                                            <td><?php echo $data['instagram_links']; ?></td>
+                                            <td><?php echo $data['linkedin_links']; ?></td>
                                             <td><button type="button" name="" id="" class="btn btn-sm btn-lg btn-block">
                                                 <?php if($data['status']=="1") {
                                                    // echo "<a href=managesection.php?id=".$data['id']." &status=0 class='bg-Success' >Active</a>";
-                                                    echo "<a href=managesection.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
+                                                    echo "<a href=manageteams.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
 
                                                 }
                                                        // echo "Enable";
                                                     elseif($data['status']=="0"){
 
-                                                        echo "<a href=managesection.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
+                                                        echo "<a href=manageteams.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
                                                         
                                                     }
-                                                     ?></button>
-                                                     
-                                                    </td>
-                                            
+                                                     ?></button></td>
                                         </tr>
-
                                         <?php      
                                     }
                                     ?>
@@ -126,4 +131,3 @@ $email = $_SESSION['email'];
             <!-- End of Main Content -->
 
 <?php require('inc/footer.php'); ?>
-

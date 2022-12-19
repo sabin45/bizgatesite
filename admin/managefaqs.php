@@ -27,11 +27,11 @@ $email = $_SESSION['email'];
 
                 <?php 
                 if (isset($_GET['id'])){
-                   $section_id =$_GET['id'];
+                   $id =$_GET['id'];
                     $status = $_GET['status'];
              
-                    $sql="UPDATE tbl_heading SET 
-                        status= '$status' WHERE id= '$section_id'";
+                    $sql="UPDATE tbl_faqs SET 
+                        status= '$status' WHERE id= '$id'";
 
                     mysqli_query($conn,$sql);
                 
@@ -57,8 +57,8 @@ $email = $_SESSION['email'];
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Question</th>
+                                            <th>Answer</th>
                                             <th>Status</th>
                                             
                                         </tr>
@@ -67,15 +67,15 @@ $email = $_SESSION['email'];
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Question</th>
+                                            <th>Answer</th>
                                             <th>Status</th>
                                             
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                    $select_query = "SELECT * FROM tbl_heading ORDER BY created_at DESC";
+                                    $select_query = "SELECT * FROM tbl_faqs ORDER BY created_at DESC";
                                     $select_result = mysqli_query($conn,$select_query);
                                     $count = 0;
                                     while($data = mysqli_fetch_array($select_result))
@@ -86,22 +86,22 @@ $email = $_SESSION['email'];
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>
-                                                <a name="" id="" class="btn btn-primary btn-sm" href="editsection.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
-                                                <a name="" id="" class="btn btn-danger btn-sm" href="process/deletesection.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
+                                                <a name="" id="" class="btn btn-primary btn-sm" href="editfaqs.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
+                                                <a name="" id="" class="btn btn-danger btn-sm" href="process/deletefaqs.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
                                             </td>
-                                            <td><?php echo $data['title']; ?></td>
-                                            <td><?php echo $data['description']; ?></td>
+                                            <td><?php echo $data['question']; ?></td>
+                                            <td><?php echo $data['answer']; ?></td>
                                             
                                             <td><button type="button" name="" id="" class="btn btn-sm btn-lg btn-block">
                                                 <?php if($data['status']=="1") {
                                                    // echo "<a href=managesection.php?id=".$data['id']." &status=0 class='bg-Success' >Active</a>";
-                                                    echo "<a href=managesection.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
+                                                    echo "<a href=managefaqs.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
 
                                                 }
                                                        // echo "Enable";
                                                     elseif($data['status']=="0"){
 
-                                                        echo "<a href=managesection.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
+                                                        echo "<a href=managefaqs.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
                                                         
                                                     }
                                                      ?></button>

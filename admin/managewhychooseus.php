@@ -24,6 +24,20 @@ $email = $_SESSION['email'];
 
                 <?php require('inc/navbar.php'); ?>
 
+                <?php 
+                if (isset($_GET['id'])){
+                   $section_id =$_GET['id'];
+                    $status = $_GET['status'];
+             
+                    $sql="UPDATE tbl_whychooseus SET 
+                        status= '$status' WHERE id= '$section_id'";
+
+                    mysqli_query($conn,$sql);
+                }
+                
+                
+              ?>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
@@ -81,7 +95,17 @@ $email = $_SESSION['email'];
                                             <td><?php echo $data['icon_link']?></td>
                                             <td><?php echo $data['feature_title']; ?></td>
                                             <td><?php echo $data['feature_desc']; ?></td>
-                                            <td><button type="button" name="" id="" class="btn btn-primary btn-sm btn-lg btn-block"><?php echo $data['status']; ?></button></td>
+                                            <td><button type="button" name="" id="" class="btn btn-sm btn-lg btn-block">
+                                                <?php if($data['status']=="1") {
+                                                    echo "<a href=managewhychooseus.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
+                                                }
+                                                    elseif($data['status']=="0"){
+
+                                                        echo "<a href=managewhychooseus.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
+                                                        
+                                                    }
+                                                     ?></button>
+                                                     </td>
                                         </tr>
                                         <?php      
                                     }

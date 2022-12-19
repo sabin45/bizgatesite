@@ -9,6 +9,8 @@ $email = $_SESSION['email'];
     }
     ?>
 
+
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -81,12 +83,19 @@ $email = $_SESSION['email'];
                                                         echo "Active";
                                                     else 
                                                         echo "Inactive"; ?></button></td>
-                                            <td><?php 
+                                            <td>
+                                                
+                                                <?php 
                                                 if($data['status']=="1") 
+                                                // <button type="submit" id = "deactivate" class="btn btn-danger btn-sm btn-lg btn-block"  value="submit" name="submit">Deactivate</button>
                                                 echo "<a href=deactivate.php?id=".$data['id']." class='btn-danger'>Deactivate</a>";
                                                 else 
                                                 echo "<a href=activate.php?id=".$data['id']." class='btn-success'>Activate</a>";
                                                 ?>
+
+                                               
+                                                
+                                                
                                             </td>
                                         </tr>
 

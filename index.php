@@ -75,14 +75,14 @@
             
         <header class="section-header">
         <?php  
-              $select_service = "SELECT * FROM tbl_heading";
+              $select_service = "SELECT * FROM tbl_heading where title ='Services'";
               $result_service = mysqli_query($conn,$select_service);
               while($data = mysqli_fetch_array($result_service)){
             ?>  
           <h3><?php echo $data['title']; ?></h3>
           <h4><?php echo $data['description']; ?></h4>
         </header>
-<?php } ?>
+        <?php } ?>
       <div class="row g-5">
         <?php  
               $select_service = "SELECT * FROM tbl_services";
@@ -111,18 +111,18 @@
     <!-- ======= Why Us Section ======= -->
     <section id="why-us" class="why-us">
       <div class="container-fluid" data-aos="fade-up">
-      <?php  
+      
+        <header class="section-header">
+          <h3>Why choose us?</h3>
+                </header>
+
+        <div class="row">
+        <?php  
               $select_whychooseus = "SELECT * FROM tbl_whychooseus";
               $result_whychooseus = mysqli_query($conn,$select_whychooseus);
               while($data = mysqli_fetch_array($result_whychooseus)){
+                if($data['status']!=="0") { 
             ?>
-        <header class="section-header">
-          <h3>Why choose us?</h3>
-          <p><?php echo $data['title']; ?></p>
-        </header>
-
-        <div class="row">
-
           <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="why-us-img">
               <img src="admin/uploads/<?php echo $data['img_link'] ; ?>" alt="" class="img-fluid">
@@ -132,37 +132,15 @@
           <div class="col-lg-6">
             <div class="why-us-content">
               <p><?php echo $data['description'] ; ?></p>
-              <p>
-                Explicabo repellendus quia labore. Non optio quo ea ut ratione et quaerat. Porro facilis deleniti porro consequatur
-                et temporibus. Labore est odio.
-
-                Odio omnis saepe qui. Veniam eaque ipsum. Ea quia voluptatum quis explicabo sed nihil repellat..
-              </p>
-
-              <div class="features clearfix" data-aos="fade-up" data-aos-delay="100">
-                <i class="bi bi-bookmarks" style="color: #f058dc;"></i>
-                <h4>Corporis dolorem</h4>
-                <p>Commodi quia voluptatum. Est cupiditate voluptas quaerat officiis ex alias dignissimos et ipsum. Soluta at enim modi ut incidunt dolor et.</p>
-              </div>
-
-              <div class="features clearfix" data-aos="fade-up" data-aos-delay="200">
-                <i class="bi bi-box-seam" style="color: #ffb774;"></i>
-                <h4>Eum ut aspernatur</h4>
-                <p>Molestias eius rerum iusto voluptas et ab cupiditate aut enim. Assumenda animi occaecati. Quo dolore fuga quasi autem aliquid ipsum odit. Perferendis doloremque iure nulla aut.</p>
-              </div>
-
-              <div class="features clearfix" data-aos="fade-up" data-aos-delay="300">
-                <i class="bi bi-card-checklist" style="color: #589af1;"></i>
-                <h4>Voluptates dolores</h4>
-                <p>Voluptates nihil et quis omnis et eaque omnis sint aut. Ducimus dolorum aspernatur. Totam dolores ut enim ullam voluptas distinctio aut.</p>
-              </div>
 
             </div>
 
           </div>
-
+          <?php 
+                }
+        } ?>
         </div>
-        <?php } ?>
+        
       </div>
 
       <div class="container">
@@ -404,8 +382,8 @@
       </div>
     </section><!-- End Portfolio Section -->
 
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+     <!-- ======= Testimonials Section ======= -->
+     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="zoom-in">
 
         <header class="section-header">
@@ -418,50 +396,28 @@
             <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
               <div class="swiper-wrapper">
 
+                <?php  
+                    $select_testimonials = "SELECT * FROM tbl_testimonials";
+                    $result_testimonials = mysqli_query($conn,$select_testimonials);
+                    while($data = mysqli_fetch_array($result_testimonials)){
+                      if($data['status']!=="0") {
+                  ?>
+
                 <div class="swiper-slide">
                   <div class="testimonial-item">
-                    <img src="assets/img/testimonial-1.jpg" class="testimonial-img" alt="">
-                    <h3>Saul Goodman</h3>
-                    <h4>Ceo &amp; Founder</h4>
+                    <img src="admin/uploads/<?php echo $data['img_link'] ; ?>" class="testimonial-img" alt="">
+                    <h3><?php echo $data['name'] ; ?></h3>
+                    <h4><?php echo $data['occupation'] ; ?></h4>
                     <p>
-                      Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                    <?php echo $data['description'] ; ?>
                     </p>
                   </div>
                 </div><!-- End testimonial item -->
 
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <img src="assets/img/testimonial-2.jpg" class="testimonial-img" alt="">
-                    <h3>Sara Wilsson</h3>
-                    <h4>Designer</h4>
-                    <p>
-                      Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt="">
-                    <h3>Jena Karlis</h3>
-                    <h4>Store Owner</h4>
-                    <p>
-                      Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <img src="assets/img/testimonial-4.jpg" class="testimonial-img" alt="">
-                    <h3>Matt Brandon</h3>
-                    <h4>Freelancer</h4>
-                    <p>
-                      Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
+               
+                <?php } 
+                    }
+              ?>
               </div>
               <div class="swiper-pagination"></div>
             </div>
@@ -471,88 +427,55 @@
       </div>
     </section><!-- End Testimonials Section -->
 
+
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
+
+  
         <div class="section-header">
-          <h3>Team</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+              <?php  
+                    $select_service = "SELECT * FROM tbl_heading where title = 'Team'";
+                    $result_service = mysqli_query($conn,$select_service);
+                    while($data = mysqli_fetch_array($result_service)){
+                  ?> 
+                <h3><?php echo $data['title']; ?></h3>
+                <p><?php echo $data['description']; ?></p>
+                <?php } ?>
         </div>
 
         <div class="row">
 
+        <?php
+            $select_teams = "SELECT * from tbl_teams";
+            $result_teams = mysqli_query($conn, $select_teams);
+
+            while($data = mysqli_fetch_array($result_teams)){
+              
+              if($data['status']!=="0") { 
+                ?>
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <img src="assets/img/team-1.jpg" class="img-fluid" alt="">
+              <img src="admin/uploads/<?php echo $data['img_link'] ; ?>" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
+                  <h4><?php echo $data['name'] ; ?></h4>
+                  <span><?php echo $data['position'] ; ?></span>
                   <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href="<?php echo $data['twitter_links'] ; ?>"><i class="bi bi-twitter"></i></a>
+                    <a href="<?php echo $data['facebook_links'] ; ?>"><i class="bi bi-facebook"></i></a>
+                    <a href="<?php echo $data['instagram_links'] ; ?>"><i class="bi bi-instagram"></i></a>
+                    <a href="<?php echo $data['linkedin_links'] ; ?>"><i class="bi bi-linkedin"></i></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <?php } 
+        
+            }
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <img src="assets/img/team-2.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
-                  <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <img src="assets/img/team-3.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
-                  <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <img src="assets/img/team-4.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
-                  <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        ?>
         </div>
 
       </div>
@@ -565,103 +488,30 @@
         <header class="section-header">
           <h3>Our Clients</h3>
         </header>
+        <?php
+            $select_teams = "SELECT * from tbl_clients";
+            $result_teams = mysqli_query($conn, $select_teams);
 
+           ?> 
         <div class="clients-slider swiper">
+         
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          <?php
+        while($data = mysqli_fetch_array($result_teams)){
+              
+          if($data['status']!=="0") { 
+            ?>
+            <div class="swiper-slide"><img src="admin/uploads/<?php echo $data['logo'] ; ?>" class="img-fluid" alt=""></div>
+           
+            <?php }
+            } ?>
           </div>
+         
           <div class="swiper-pagination"></div>
         </div>
-
+        
       </div>
     </section><!-- End Clients Section -->
-
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing section-bg wow fadeInUp">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h3>Pricing</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
-        </header>
-
-        <div class="row flex-items-xs-middle flex-items-xs-center">
-
-          <!-- Basic Plan  -->
-          <div class="col-xs-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="card">
-              <div class="card-header">
-                <h3><span class="currency">$</span>19<span class="period">/month</span></h3>
-              </div>
-              <div class="card-block">
-                <h4 class="card-title">
-                  Basic Plan
-                </h4>
-                <ul class="list-group">
-                  <li class="list-group-item">Odio animi voluptates</li>
-                  <li class="list-group-item">Inventore quisquam et</li>
-                  <li class="list-group-item">Et perspiciatis suscipit</li>
-                  <li class="list-group-item">24/7 Support System</li>
-                </ul>
-                <a href="#" class="btn">Choose Plan</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Regular Plan  -->
-          <div class="col-xs-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-              <div class="card-header">
-                <h3><span class="currency">$</span>29<span class="period">/month</span></h3>
-              </div>
-              <div class="card-block">
-                <h4 class="card-title">
-                  Regular Plan
-                </h4>
-                <ul class="list-group">
-                  <li class="list-group-item">Odio animi voluptates</li>
-                  <li class="list-group-item">Inventore quisquam et</li>
-                  <li class="list-group-item">Et perspiciatis suscipit</li>
-                  <li class="list-group-item">24/7 Support System</li>
-                </ul>
-                <a href="#" class="btn">Choose Plan</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Premium Plan  -->
-          <div class="col-xs-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="card">
-              <div class="card-header">
-                <h3><span class="currency">$</span>39<span class="period">/month</span></h3>
-              </div>
-              <div class="card-block">
-                <h4 class="card-title">
-                  Premium Plan
-                </h4>
-                <ul class="list-group">
-                  <li class="list-group-item">Odio animi voluptates</li>
-                  <li class="list-group-item">Inventore quisquam et</li>
-                  <li class="list-group-item">Et perspiciatis suscipit</li>
-                  <li class="list-group-item">24/7 Support System</li>
-                </ul>
-                <a href="#" class="btn">Choose Plan</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section><!-- End Pricing Section -->
 
     <!-- ======= F.A.Q Section ======= -->
     <section id="faq" class="faq">

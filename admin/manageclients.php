@@ -24,24 +24,19 @@ $email = $_SESSION['email'];
 
                 <?php require('inc/navbar.php'); ?>
 
-
                 <?php 
                 if (isset($_GET['id'])){
                    $section_id =$_GET['id'];
                     $status = $_GET['status'];
              
-                    $sql="UPDATE tbl_heading SET 
+                    $sql="UPDATE tbl_clients SET 
                         status= '$status' WHERE id= '$section_id'";
 
                     mysqli_query($conn,$sql);
-                
-                //header('location:managesection.php');
-                // Go back to course-page.php
                 }
                 
-              ?>
                 
-           
+              ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -57,25 +52,23 @@ $email = $_SESSION['email'];
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Client Links</th>
+                                            <th>File</th>
                                             <th>Status</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Client Links</th>
+                                            <th>File</th>
                                             <th>Status</th>
-                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                    $select_query = "SELECT * FROM tbl_heading ORDER BY created_at DESC";
+                                    $select_query = "SELECT * FROM tbl_clients ORDER BY created_at DESC";
                                     $select_result = mysqli_query($conn,$select_query);
                                     $count = 0;
                                     while($data = mysqli_fetch_array($select_result))
@@ -86,28 +79,23 @@ $email = $_SESSION['email'];
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>
-                                                <a name="" id="" class="btn btn-primary btn-sm" href="editsection.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
-                                                <a name="" id="" class="btn btn-danger btn-sm" href="process/deletesection.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
+                                                <a name="" id="" class="btn btn-primary btn-sm" href="editclients.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
+                                                <a name="" id="" class="btn btn-danger btn-sm" href="process/deleteclients.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
                                             </td>
-                                            <td><?php echo $data['title']; ?></td>
-                                            <td><?php echo $data['description']; ?></td>
-                                            
+                                            <td><?php echo $data['client_links']; ?></td>
+                                            <td><?php echo $data['logo']; ?></td>
+
                                             <td><button type="button" name="" id="" class="btn btn-sm btn-lg btn-block">
                                                 <?php if($data['status']=="1") {
-                                                   // echo "<a href=managesection.php?id=".$data['id']." &status=0 class='bg-Success' >Active</a>";
-                                                    echo "<a href=managesection.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
-
+                                                    echo "<a href=manageclients.php?id=".$data['id']."&status=0 class='bg-success btn-block'>Active</a>";
                                                 }
-                                                       // echo "Enable";
                                                     elseif($data['status']=="0"){
 
-                                                        echo "<a href=managesection.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
+                                                        echo "<a href=manageclients.php?id=".$data['id']."&status=1 class='bg-Danger btn-block' >Inactive</a>";
                                                         
                                                     }
                                                      ?></button>
-                                                     
-                                                    </td>
-                                            
+                                            </td>
                                         </tr>
 
                                         <?php      
@@ -126,4 +114,3 @@ $email = $_SESSION['email'];
             <!-- End of Main Content -->
 
 <?php require('inc/footer.php'); ?>
-
